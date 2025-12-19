@@ -3,20 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎄 2025 Yılbaşı Çekilişi 🎁</title>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+    <title>🎄 Yılbaşı Çekilişi 2025 🎁</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Roboto:wght@400;700&display=swap');
+
         /* --- GENEL AYARLAR --- */
         :root {
-            --red: #ff4757;
-            --green: #2ed573;
-            --gold: #ffa502;
-            --dark: #2f3542;
+            --bg-gradient: radial-gradient(circle at center, #000428 0%, #004e92 100%);
+            --card-bg: rgba(255, 255, 255, 0.15);
+            --gold: #FFD700;
+            --red: #ff3838;
         }
 
         body {
-            font-family: 'Segoe UI', sans-serif; /* Okunabilirlik için */
-            background: radial-gradient(circle at center, #1e272e 0%, #000000 100%);
+            font-family: 'Roboto', sans-serif;
+            background: var(--bg-gradient);
             color: white;
             margin: 0;
             min-height: 100vh;
@@ -24,11 +25,12 @@
             flex-direction: column;
             align-items: center;
             overflow-x: hidden;
+            user-select: none; /* Metin seçimini engelle */
         }
 
-        h1, h2, h3, .big-text {
-            font-family: 'Fredoka One', cursive; /* Başlıklar eğlenceli */
-            letter-spacing: 2px;
+        h1, h2, h3, .fun-font {
+            font-family: 'Fredoka One', cursive;
+            letter-spacing: 1px;
         }
 
         /* --- KAR EFEKTİ --- */
@@ -39,96 +41,93 @@
             animation: fall linear infinite;
             z-index: 1;
             pointer-events: none;
-            opacity: 0.7;
+            opacity: 0.6;
         }
-        @keyframes fall {
-            to { transform: translateY(105vh) rotate(360deg); }
-        }
+        @keyframes fall { to { transform: translateY(105vh) rotate(360deg); } }
 
-        /* --- ANA KAP --- */
+        /* --- KONTEYNER --- */
         .container {
+            position: relative;
             z-index: 10;
             width: 90%;
-            max-width: 900px;
+            max-width: 800px;
             text-align: center;
-            padding: 20px;
-            margin-top: 30px;
+            padding-top: 40px;
         }
 
         /* --- GİRİŞ EKRANI --- */
-        #introScreen h1 {
-            font-size: 3rem;
-            color: var(--red);
-            text-shadow: 4px 4px 0px #fff;
-            margin-bottom: 10px;
-            animation: bounce 2s infinite;
+        #introScreen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 50px;
         }
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
-            40% {transform: translateY(-20px);}
-            60% {transform: translateY(-10px);}
+
+        .title-box h1 {
+            font-size: 3.5rem;
+            color: var(--red);
+            text-shadow: 0 0 10px #fff, 0 0 20px var(--red);
+            margin: 0;
+            line-height: 1.1;
         }
 
         .start-btn {
-            background: var(--green);
+            background: linear-gradient(to bottom, #2ecc71, #27ae60);
             color: white;
             border: none;
-            padding: 20px 60px;
-            font-size: 2rem;
-            border-radius: 60px;
+            padding: 20px 80px;
+            font-size: 1.8rem;
+            border-radius: 50px;
             font-family: 'Fredoka One', cursive;
             cursor: pointer;
-            box-shadow: 0 10px 0px #218c74; /* 3D Buton efekti */
-            transition: all 0.1s;
-            margin-top: 40px;
+            box-shadow: 0 8px 0 #1e8449, 0 15px 20px rgba(0,0,0,0.4);
+            margin-top: 50px;
+            transition: transform 0.1s;
         }
         .start-btn:active {
-            box-shadow: 0 2px 0px #218c74;
             transform: translateY(8px);
+            box-shadow: 0 0 0 #1e8449, 0 5px 10px rgba(0,0,0,0.4);
         }
 
-        /* --- KARTLAR EKRANI --- */
-        #gridScreen { display: none; }
+        /* --- LİSTE EKRANI --- */
+        #gridScreen { display: none; padding-bottom: 50px; }
         
+        .grid-title {
+            color: var(--gold);
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
         .name-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-            gap: 20px;
-            margin-top: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
         }
 
-        .name-card {
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(5px);
-            border: 2px solid rgba(255,255,255,0.2);
-            padding: 25px 10px;
-            border-radius: 20px;
+        .name-btn {
+            background: var(--card-bg);
+            backdrop-filter: blur(8px);
+            border: 2px solid rgba(255,255,255,0.3);
+            color: white;
+            padding: 20px;
+            font-size: 1.3rem;
             font-weight: bold;
-            font-size: 1.2rem;
+            border-radius: 15px;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 0.2s;
             position: relative;
             overflow: hidden;
         }
-        
-        .name-card::before {
-            content: '🎄';
-            position: absolute;
-            top: -5px;
-            right: -5px;
-            font-size: 20px;
-            opacity: 0.5;
-        }
-
-        .name-card:hover {
-            transform: scale(1.1) rotate(2deg);
-            background: var(--red);
-            border-color: white;
-            box-shadow: 0 0 20px var(--red);
+        .name-btn:hover {
+            background: var(--gold);
+            color: #333;
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
             z-index: 5;
         }
 
-        /* --- MODAL (AÇILIR KUTU) --- */
+        /* --- MODAL (POPUP) --- */
         .modal {
             display: none;
             position: fixed;
@@ -143,144 +142,144 @@
         }
 
         .modal-content {
-            background: white;
+            background: #fff;
             color: #333;
             width: 85%;
-            max-width: 400px;
-            padding: 40px 20px;
-            border-radius: 30px;
+            max-width: 380px;
+            padding: 30px;
+            border-radius: 25px;
             text-align: center;
             position: relative;
-            box-shadow: 0 0 50px rgba(255, 71, 87, 0.5);
-            animation: popUp 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            box-shadow: 0 0 50px rgba(255, 255, 255, 0.4);
+            animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        @keyframes popUp { from { transform: scale(0); } to { transform: scale(1); } }
+        @keyframes popIn { from { transform: scale(0.5); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 
-        .pin-input {
-            width: 60%;
-            padding: 15px;
-            font-size: 2rem;
-            text-align: center;
-            border: 3px solid #ddd;
-            border-radius: 15px;
-            margin: 20px 0;
-            font-family: 'Fredoka One', cursive;
-            letter-spacing: 8px;
-            color: var(--dark);
-        }
-        .pin-input:focus { outline: none; border-color: var(--gold); }
-
-        .gift-emoji {
-            font-size: 100px;
-            cursor: pointer;
-            animation: shake 2s infinite;
-            transition: transform 0.2s;
-            margin: 10px 0;
-        }
-        .gift-emoji:hover { transform: scale(1.1); }
-
-        @keyframes shake {
-            0% { transform: rotate(0deg); }
-            25% { transform: rotate(10deg); }
-            50% { transform: rotate(0deg); }
-            75% { transform: rotate(-10deg); }
-            100% { transform: rotate(0deg); }
-        }
-
-        /* SONUÇ VE KONFETİ */
-        .result-box {
-            display: none;
-        }
-        .loading-text {
-            font-size: 1.5rem;
-            color: var(--gold);
-            font-weight: bold;
-            display: none; /* JS ile açılacak */
-        }
-        
-        .winner-name {
-            font-family: 'Fredoka One', cursive;
-            font-size: 3rem;
-            color: var(--red);
-            text-transform: uppercase;
-            margin: 20px 0;
-            text-shadow: 3px 3px 0px #eee;
-            animation: zoomIn 0.5s;
-        }
-        @keyframes zoomIn { from { transform: scale(0); } to { transform: scale(1); } }
-
-        .close-btn {
+        .close-icon {
             position: absolute;
             top: 15px;
             right: 20px;
-            font-size: 30px;
+            font-size: 28px;
             cursor: pointer;
             color: #aaa;
             font-weight: bold;
         }
-        
-        /* Konfeti parçacığı */
+
+        /* PIN Giriş Kısmı */
+        .pin-box input {
+            width: 70%;
+            padding: 15px;
+            font-size: 2rem;
+            text-align: center;
+            letter-spacing: 5px;
+            border: 3px solid #eee;
+            border-radius: 12px;
+            margin: 20px 0;
+            font-family: 'Fredoka One', cursive;
+            outline: none;
+        }
+        .pin-box input:focus { border-color: var(--gold); }
+
+        .action-btn {
+            background: var(--red);
+            color: white;
+            border: none;
+            padding: 12px 40px;
+            font-size: 1.2rem;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(255, 56, 56, 0.4);
+        }
+
+        /* Hediye Paketi */
+        .gift-wrapper {
+            font-size: 100px;
+            cursor: pointer;
+            animation: wiggle 2s infinite;
+            margin: 20px 0;
+        }
+        @keyframes wiggle { 0%, 100% { transform: rotate(-5deg); } 50% { transform: rotate(5deg); } }
+
+        /* Sonuç Ekranı */
+        .result-name {
+            font-family: 'Fredoka One', cursive;
+            font-size: 2.8rem;
+            color: var(--red);
+            text-transform: uppercase;
+            margin: 20px 0;
+            padding: 10px;
+            border: 4px dashed var(--gold);
+            border-radius: 15px;
+            background-color: #fff8e1;
+            animation: zoomBig 0.5s;
+        }
+        @keyframes zoomBig { from { transform: scale(0); } to { transform: scale(1); } }
+
+        /* Konfeti */
         .confetti {
             position: absolute;
-            width: 10px;
-            height: 10px;
+            width: 12px;
+            height: 12px;
             background-color: #f00;
-            animation: confetti-fall linear forwards;
+            animation: fallConfetti 2s linear forwards;
+            top: -10px;
         }
-        @keyframes confetti-fall {
-            0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
-        }
+        @keyframes fallConfetti { to { transform: translateY(500px) rotate(720deg); opacity: 0; } }
 
     </style>
 </head>
 <body>
 
-    <div id="snow-area"></div>
+    <div id="snow-container"></div>
 
     <div class="container">
         
         <div id="introScreen">
-            <div style="font-size: 5rem; margin-bottom: -20px;">🎅</div>
-            <h1>YILBAŞI<br>ÇEKİLİŞİ</h1>
-            <p style="font-size: 1.2rem; opacity: 0.8;">11 Kişilik Ekip - Şansını Dene!</p>
-            <button class="start-btn" onclick="startApp()">BAŞLA</button>
+            <div class="title-box">
+                <div style="font-size: 80px; margin-bottom: 10px;">🎅</div>
+                <h1>YILBAŞI<br>ÇEKİLİŞİ</h1>
+                <h3 style="color:var(--gold); margin-top:10px;">2025 ÖZEL</h3>
+            </div>
+            <button class="start-btn" onclick="goToGrid()">BAŞLA 🎲</button>
         </div>
 
         <div id="gridScreen">
-            <h2>İsmini Seç</h2>
-            <p>Sana verilen 4 haneli kodu girmen gerek.</p>
-            <div class="name-grid" id="namesContainer"></div>
+            <h2 class="grid-title">Sen Hangisisin?</h2>
+            <p style="opacity: 0.8; margin-bottom: 20px;">Lütfen kendi ismine tıkla.</p>
+            <div class="name-grid" id="buttonsContainer"></div>
         </div>
 
     </div>
 
     <div id="modal" class="modal">
         <div class="modal-content">
-            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <span class="close-icon" onclick="closeModal()">&times;</span>
 
-            <div id="step-pin">
-                <h2 id="modal-name-title" style="color:var(--dark)">Hoşgeldin!</h2>
-                <p>Kutuyu açmak için şifreni gir:</p>
-                <input type="tel" id="pinInput" class="pin-input" maxlength="4" placeholder="••••">
-                <br>
-                <button class="start-btn" style="padding: 10px 40px; font-size: 1.2rem; margin-top:0;" onclick="checkPin()">GİRİŞ</button>
+            <div id="step-auth">
+                <h2 id="modal-user-name" style="color: #333; margin-bottom: 5px;">Kullanıcı Adı</h2>
+                <p style="color:#777; font-size: 0.9rem;">Lütfen size verilen şifreyi girin:</p>
+                
+                <div class="pin-box">
+                    <input type="tel" id="pinInput" maxlength="4" placeholder="••••">
+                </div>
+                
+                <button class="action-btn" onclick="verify()">GİRİŞ YAP</button>
             </div>
 
-            <div id="step-gift" style="display:none;">
-                <h3 style="color:var(--green)">Hazır mısın?</h3>
-                <div class="gift-emoji" onclick="revealGift()">🎁</div>
-                <p>Pakete tıkla!</p>
-                
-                <div id="loadingMsg" class="loading-text">
+            <div id="step-gift" style="display: none;">
+                <h2 style="color: #27ae60;">Giriş Başarılı!</h2>
+                <p>Pakete tıkla ve şansını gör 👇</p>
+                <div class="gift-wrapper" onclick="reveal()">🎁</div>
+                <div id="shuffle-text" style="display:none; color:var(--gold); font-weight:bold; font-size:1.2rem;">
                     🎲 Karıştırılıyor...
                 </div>
             </div>
 
-            <div id="step-result" class="result-box">
-                <p style="color:#555; font-weight:bold;">Hediye Alacağın Kişi:</p>
-                <div class="winner-name" id="finalResult">???</div>
-                <p style="font-size:0.9rem; color:#888;">🤫 Aramızda kalsın!</p>
+            <div id="step-result" style="display: none;">
+                <p style="color:#555; font-weight:bold;">Sana Çıkan İsim:</p>
+                <div class="result-name" id="final-name">???</div>
+                <p style="font-size: 0.8rem; color:#999;">(Ekran görüntüsü al ve sakla!)</p>
             </div>
 
         </div>
@@ -288,8 +287,7 @@
 
     <script>
         // --- AYARLAR ---
-        // Şifreler sabit kaldı, değişmedi.
-        const participants = {
+        const users = {
             "Fatih":    "1905",
             "Rumeysa":  "2486",
             "Ayşe":     "3571",
@@ -302,152 +300,153 @@
             "Tuba":     "6290",
             "Neda":     "2025"
         };
-        
-        // --- YENİ TOHUM (SEED) ---
-        // Bu sayıyı değiştirdiğim için çekiliş sonucu tamamen yenilendi!
-        const SEED = 448822; 
 
-        // --- RASTGELELİK MOTORU ---
-        function mulberry32(a) {
-            return function() {
-              var t = a += 0x6D2B79F5;
-              t = Math.imul(t ^ t >>> 15, t | 1);
-              t ^= t + Math.imul(t ^ t >>> 7, t | 61);
-              return ((t ^ t >>> 14) >>> 0) / 4294967296;
-            }
-        }
-        function shuffle(array, seed) {
-            const rng = mulberry32(seed);
-            let m = array.length, t, i;
-            while (m) {
-                i = Math.floor(rng() * m--);
-                t = array[m];
-                array[m] = array[i];
-                array[i] = t;
-            }
-            return array;
-        }
+        // Bu "SEED" kodu, herkesin telefonunda aynı sonucun çıkmasını sağlar.
+        // Değiştirirsen tüm eşleşmeler değişir.
+        const SECRET_SEED = 777333; 
 
-        // --- EŞLEŞTİRME ---
+        // --- SİSTEM ---
+        let selectedUser = "";
         let matches = {};
-        const namesList = Object.keys(participants);
-        let shuffledNames = [...namesList];
-        shuffle(shuffledNames, SEED);
-        
-        for (let i = 0; i < shuffledNames.length; i++) {
-            let giver = shuffledNames[i];
-            let receiver = shuffledNames[(i + 1) % shuffledNames.length];
-            matches[giver] = receiver;
+
+        // Rastgele Sayı Üretici (Sabit Sonuçlu)
+        function seededRandom(seed) {
+            let value = seed;
+            return function() {
+                value = (value * 9301 + 49297) % 233280;
+                return value / 233280;
+            }
         }
 
-        // --- UI KODLARI ---
-        
-        // Kar Yağışı
-        const snowArea = document.getElementById('snow-area');
-        for(let i=0; i<30; i++) {
-            let flake = document.createElement('div');
-            flake.className = 'snowflake';
-            flake.innerText = ['❄', '❅', '❆'][Math.floor(Math.random()*3)];
-            flake.style.left = Math.random() * 100 + 'vw';
-            flake.style.fontSize = (Math.random() * 20 + 10) + 'px';
-            flake.style.animationDuration = (Math.random() * 5 + 5) + 's';
-            flake.style.animationDelay = Math.random() * 5 + 's';
-            snowArea.appendChild(flake);
+        // Çekilişi Hesapla
+        function calculateMatches() {
+            const keys = Object.keys(users);
+            const rng = seededRandom(SECRET_SEED);
+            
+            // İsimleri karıştır
+            let shuffled = [...keys];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(rng() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+
+            // Zincirleme Eşleşme
+            for (let i = 0; i < shuffled.length; i++) {
+                let giver = shuffled[i];
+                let receiver = shuffled[(i + 1) % shuffled.length];
+                matches[giver] = receiver;
+            }
         }
 
-        // Uygulama Başlat
-        function startApp() {
+        // --- GÖRSEL FONKSİYONLAR ---
+        
+        // Kar Efekti
+        const snowBox = document.getElementById('snow-container');
+        function makeSnow() {
+            for(let i=0; i<40; i++){
+                let s = document.createElement('div');
+                s.className = 'snowflake';
+                s.innerHTML = '❄';
+                s.style.left = Math.random()*100 + 'vw';
+                s.style.animationDuration = (Math.random()*5 + 5) + 's';
+                s.style.fontSize = (Math.random()*15 + 10) + 'px';
+                s.style.animationDelay = Math.random()*5 + 's';
+                snowBox.appendChild(s);
+            }
+        }
+
+        // Uygulamayı Başlat
+        function goToGrid() {
             document.getElementById('introScreen').style.display = 'none';
             document.getElementById('gridScreen').style.display = 'block';
             
-            const grid = document.getElementById('namesContainer');
-            let sortedNames = [...namesList].sort((a,b)=>a.localeCompare(b,'tr'));
+            const container = document.getElementById('buttonsContainer');
+            // İsimleri Alfabetik Sırala
+            const names = Object.keys(users).sort((a,b) => a.localeCompare(b,'tr'));
             
-            sortedNames.forEach(name => {
-                let div = document.createElement('div');
-                div.className = 'name-card';
-                div.innerText = name;
-                div.onclick = () => openModal(name);
-                grid.appendChild(div);
+            names.forEach(name => {
+                let btn = document.createElement('div');
+                btn.className = 'name-btn';
+                btn.innerText = name;
+                btn.onclick = () => openModal(name);
+                container.appendChild(btn);
             });
         }
 
-        // Modal İşlemleri
-        let currentUser = "";
+        // Modal Aç
         const modal = document.getElementById('modal');
-        const pinInput = document.getElementById('pinInput');
+        const pinIn = document.getElementById('pinInput');
 
         function openModal(name) {
-            currentUser = name;
+            selectedUser = name;
             modal.style.display = 'flex';
-            // Ekranları Resetle
-            document.getElementById('step-pin').style.display = 'block';
+            
+            // Ekranları Sıfırla
+            document.getElementById('step-auth').style.display = 'block';
             document.getElementById('step-gift').style.display = 'none';
             document.getElementById('step-result').style.display = 'none';
-            document.getElementById('loadingMsg').style.display = 'none';
+            document.getElementById('shuffle-text').style.display = 'none';
             
-            document.getElementById('modal-name-title').innerText = name;
-            pinInput.value = "";
-            pinInput.focus();
+            document.getElementById('modal-user-name').innerText = name;
+            pinIn.value = "";
+            pinIn.focus();
         }
 
         function closeModal() {
             modal.style.display = 'none';
         }
 
-        function checkPin() {
-            if (pinInput.value === participants[currentUser]) {
-                document.getElementById('step-pin').style.display = 'none';
+        // Şifre Kontrol
+        function verify() {
+            if (pinIn.value === users[selectedUser]) {
+                document.getElementById('step-auth').style.display = 'none';
                 document.getElementById('step-gift').style.display = 'block';
             } else {
-                alert("Yanlış Şifre! 🎅");
-                pinInput.value = "";
+                alert("Hatalı Şifre! Lütfen gruba atılan listeden kontrol et.");
+                pinIn.value = "";
             }
         }
 
-        // Hediye Açma ve Animasyon
-        function revealGift() {
-            const loadingMsg = document.getElementById('loadingMsg');
-            const giftBtn = document.querySelector('.gift-emoji');
+        // Paketi Aç ve Konfeti
+        function reveal() {
+            const txt = document.getElementById('shuffle-text');
+            const gift = document.querySelector('.gift-wrapper');
             
-            // 1. Heyecan Yarat
-            loadingMsg.style.display = 'block';
-            giftBtn.style.animation = "shake 0.1s infinite"; // Çok hızlı salla
-
-            // 2. Bekle ve Aç
+            txt.style.display = 'block';
+            gift.style.animation = "wiggle 0.1s infinite"; // Hızlı titreme
+            
+            // 1.5 saniye bekle
             setTimeout(() => {
                 document.getElementById('step-gift').style.display = 'none';
                 document.getElementById('step-result').style.display = 'block';
-                document.getElementById('finalResult').innerText = matches[currentUser];
+                document.getElementById('final-name').innerText = matches[selectedUser];
                 
-                // Konfeti Patlat!
                 fireConfetti();
-                
-            }, 2000); // 2 saniye beklet
+            }, 1500);
         }
 
-        // Basit Konfeti Fonksiyonu
+        // Konfeti Efekti
         function fireConfetti() {
-            const colors = ['#ff4757', '#2ed573', '#ffa502', '#3742fa', '#e84393'];
-            const modalContent = document.querySelector('.modal-content');
+            const colors = ['#f00', '#0f0', '#00f', '#ff0', '#f0f'];
+            const content = document.querySelector('.modal-content');
             
-            for (let i = 0; i < 50; i++) {
-                const conf = document.createElement('div');
-                conf.className = 'confetti';
-                conf.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                conf.style.left = Math.random() * 100 + '%';
-                conf.style.top = -10 + 'px';
-                conf.style.animationDuration = (Math.random() * 1 + 0.5) + 's';
-                modalContent.appendChild(conf); // Modalin içine ekle
-                
-                // Temizlik
-                setTimeout(() => conf.remove(), 2000);
+            for(let i=0; i<60; i++) {
+                let c = document.createElement('div');
+                c.className = 'confetti';
+                c.style.background = colors[Math.floor(Math.random()*colors.length)];
+                c.style.left = (Math.random()*100) + '%';
+                c.style.animationDuration = (Math.random()*1 + 1) + 's';
+                content.appendChild(c);
             }
         }
-        
+
+        // Başlangıç
+        calculateMatches(); // Arka planda eşleşmeleri yap
+        makeSnow(); // Kar yağdır
+
         // Enter tuşu desteği
-        pinInput.addEventListener("keypress", function(e) {
-            if(e.key === "Enter") checkPin();
+        pinIn.addEventListener("keypress", function(e) {
+            if(e.key === "Enter") verify();
         });
 
     </script>
