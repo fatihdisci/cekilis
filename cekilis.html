@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎄 Büyük Yılbaşı Çekilişi 2025 🎁</title>
+    <style>
+        /* GENEL TASARIM VE FONLAR */
+        :root {
+            --primary: #c0392b;
+            --secondary: #27ae60;
+            --gold: #f1c40f;
+            --dark: #2c3e50;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: radial-gradient(circle, #8e44ad 0%, #2c3e50 100%);
+            color: white;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+        }
+
+        /* KAR EFEKTİ */
+        .snowflake {
+            position: fixed;
+            top: -10px;
+            color: #fff;
+            font-size: 1em;
+            animation: fall linear infinite;
+            z-index: 1;
+        }
+        @keyframes fall {
+            to { transform: translateY(105vh); }
+        }
+
+        /* ANA KONTEYNER */
+        .container {
+            position: relative;
+            z-index: 10;
+            width: 90%;
+            max-width: 800px;
+            text-align: center;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            text-shadow: 0 0 10px #ff0000, 0 0 20px #000;
+            margin-bottom: 10px;
+            color: var(--gold);
+        }
+
+        /* GİRİŞ EKRANI */
+        #introScreen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 60vh;
+        }
+        
+        .big-btn {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            color: white;
+            border: none;
+            padding: 20px 40px;
+            font-size: 1.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+            transition: transform 0.3s, box-shadow 0.3s;
+            font-weight: bold;
+            letter-spacing: 1px;
+            margin-top: 30px;
+        }
+        .big-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.6);
+            background: linear-gradient(45deg, #ff6b6b, #ee5253);
+        }
+
+        /* İSİM LİSTESİ EKRANI */
+        #gridScreen {
+            display: none; /* Başlangıçta gizli */
+            animation: fadeIn 1s ease-in;
+        }
+
+        .name-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .name-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 20px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .name-card:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-5px);
+            border-color: var(--gold);
+        }
+
+        /* MODAL (SONUÇ EKRANI) */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-box {
+            background: white;
+            color: #333;
+            width: 90%;
+            max-width: 400px;
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 0 50px rgba(255, 215, 0, 0.5);
+            animation: zoomIn 0.3s ease-out;
+        }
+
+        input {
+            width: 80%;
+            padding: 15px;
+            font-size: 1.2rem;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .result-reveal {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .gift-box {
+            font-size: 80px;
+            cursor: pointer;
+            animation: wiggle 2s infinite;
+        }
+
+        .final-name {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin: 20px 0;
+            text-transform: uppercase;
+            animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 30px;
+            cursor: pointer;
+            color: #999;
+        }
+
+        /* Animasyonlar */
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes zoomIn { from { transform: scale(0.5); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        @keyframes popIn { 0% { transform: scale(0); } 80% { transform: scale(1.2); } 100% { transform: scale(1); } }
+        @keyframes wiggle { 0%, 100% { transform: rotate(-3deg); } 50% { transform: rotate(3deg); } }
+
+    </style>
+</head>
+<body>
+
+    <div id="snow-container"></div>
+
+    <div class="container">
+        <div id="introScreen">
+            <div style="font-size: 80px;">🎅</div>
+            <h1>Büyük Yılbaşı Çekilişi</h1>
+            <p>11 Kişilik Dev Kadro! Hazır mısınız?</p>
+            <button class="big-btn" onclick="startDraw()">Çekilişi Yap! 🎲</button>
+            <p style="font-size: 0.8rem; margin-top: 20px; opacity: 0.7;">(Sonuçlar matematiksel olarak hesaplanır ve herkes için aynıdır.)</p>
+        </div>
+
+        <div id="gridScreen">
+            <h2>Kendi İsmini Seç</h2>
+            <p>Sonucu görmek için ismine tıkla ve doğrulama yap.</p>
+            <div class="name-grid" id="nameGrid"></div>
+        </div>
+    </div>
+
+    <div id="modal" class="modal">
+        <div class="modal-box">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            
+            <div id="authStep">
+                <h2 id="modalTitle">Hoşgeldin!</h2>
+                <p>Eğer gerçekten <b id="targetName"></b> isen, lütfen aşağıdaki kutuya kendi ismini yaz:</p>
+                <input type="text" id="nameInput" placeholder="İsminiz..." autocomplete="off">
+                <button class="big-btn" style="padding: 10px 30px; font-size: 1rem;" onclick="verifyUser()">Doğrula</button>
+            </div>
+
+            <div id="giftStep" style="display: none;">
+                <h3>Paketi Aç!</h3>
+                <div class="gift-box" onclick="openGift()">🎁</div>
+                <p>Tıklayınca açılır...</p>
+            </div>
+
+            <div id="resultStep" class="result-reveal">
+                <p>🎉 SENİN HEDİYE ALACAĞIN KİŞİ: 🎉</p>
+                <div class="final-name" id="matchResult">???</div>
+                <p>🤫 Aramızda kalsın!</p>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // --- 1. VERİ VE AYARLAR ---
+        const names = [
+            "Fatih", "Rumeysa", "Ayşe", "Serkan", "Ömer", 
+            "Dilara", "Mustafa", "Ümmühan", "Hümeyra", "Tuba", "Neda"
+        ];
+        
+        // Bu "SEED" sayısı sayesinde çekiliş her cihazda AYNI sonucu verir.
+        // Bunu değiştirirseniz herkesin eşleşmesi değişir.
+        const SEED = 20251231; 
+
+        // --- 2. ÇEKİLİŞ ALGORİTMASI (Seeded Random) ---
+        // Bu fonksiyon standart Math.random yerine, her zaman aynı sayı dizisini üretir.
+        function mulberry32(a) {
+            return function() {
+              var t = a += 0x6D2B79F5;
+              t = Math.imul(t ^ t >>> 15, t | 1);
+              t ^= t + Math.imul(t ^ t >>> 7, t | 61);
+              return ((t ^ t >>> 14) >>> 0) / 4294967296;
+            }
+        }
+
+        // Listeyi karıştırır (Ama her zaman aynı şekilde karıştırır)
+        function shuffle(array, seed) {
+            const rng = mulberry32(seed);
+            let m = array.length, t, i;
+            // Fisher-Yates shuffle
+            while (m) {
+                i = Math.floor(rng() * m--);
+                t = array[m];
+                array[m] = array[i];
+                array[i] = t;
+            }
+            return array;
+        }
+
+        // Eşleşmeleri hesapla (Zincirleme)
+        // Karıştırılmış listede: 1->2, 2->3 ... Son->İlk
+        let matches = {};
+        
+        // Çekiliş mantığını başlat
+        // Orijinal listeyi kopyala ve karıştır
+        let shuffledNames = [...names]; 
+        shuffle(shuffledNames, SEED); 
+
+        // Eşleşme Sözlüğünü Oluştur
+        for (let i = 0; i < shuffledNames.length; i++) {
+            let giver = shuffledNames[i];
+            let receiver = shuffledNames[(i + 1) % shuffledNames.length]; // Son kişi başa döner
+            matches[giver] = receiver;
+        }
+
+        // --- 3. ARAYÜZ İŞLEMLERİ ---
+
+        // Kar Efekti
+        function createSnow() {
+            const container = document.getElementById('snow-container');
+            for(let i=0; i<30; i++) {
+                let flake = document.createElement('div');
+                flake.className = 'snowflake';
+                flake.innerHTML = '❄';
+                flake.style.left = Math.random() * 100 + 'vw';
+                flake.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                flake.style.opacity = Math.random();
+                flake.style.fontSize = (Math.random() * 10 + 10) + 'px';
+                flake.style.animationDelay = Math.random() * 5 + 's';
+                container.appendChild(flake);
+            }
+        }
+        createSnow();
+
+        // Çekilişi Başlat (Görsel Geçiş)
+        function startDraw() {
+            document.getElementById('introScreen').style.display = 'none';
+            document.getElementById('gridScreen').style.display = 'block';
+            renderGrid();
+        }
+
+        // İsimleri Listele (Alfabetik dizelim ki kimin kime çıktığı anlaşılmasın)
+        function renderGrid() {
+            const grid = document.getElementById('nameGrid');
+            // İsimleri butonlar için alfabetik sıralıyoruz (Eşleşme arka planda sabit kalıyor)
+            let displayNames = [...names].sort((a, b) => a.localeCompare(b, 'tr'));
+            
+            displayNames.forEach(name => {
+                let div = document.createElement('div');
+                div.className = 'name-card';
+                div.innerText = name;
+                div.onclick = () => openModal(name);
+                grid.appendChild(div);
+            });
+        }
+
+        // Modal İşlemleri
+        let currentName = "";
+        const modal = document.getElementById('modal');
+        const authStep = document.getElementById('authStep');
+        const giftStep = document.getElementById('giftStep');
+        const resultStep = document.getElementById('resultStep');
+
+        function openModal(name) {
+            currentName = name;
+            modal.style.display = 'flex';
+            
+            // Sıfırla
+            document.getElementById('nameInput').value = "";
+            document.getElementById('targetName').innerText = name;
+            
+            authStep.style.display = 'block';
+            giftStep.style.display = 'none';
+            resultStep.style.display = 'none';
+        }
+
+        function closeModal() {
+            modal.style.display = 'none';
+        }
+
+        function verifyUser() {
+            let input = document.getElementById('nameInput').value.trim().toLocaleLowerCase('tr-TR');
+            let target = currentName.toLocaleLowerCase('tr-TR');
+
+            if (input === target) {
+                authStep.style.display = 'none';
+                giftStep.style.display = 'block'; // Hediye paketine geç
+            } else {
+                alert("Lütfen sadece kendi isminizi girin! Doğrulama başarısız.");
+            }
+        }
+
+        function openGift() {
+            giftStep.style.display = 'none';
+            resultStep.style.display = 'block';
+            // Arka plandaki matches objesinden sonucu çek
+            document.getElementById('matchResult').innerText = matches[currentName];
+            
+            // Biraz konfetimsi efekt (basitçe arka plan rengi değişsin)
+            document.querySelector('.modal-box').style.boxShadow = "0 0 100px #e74c3c";
+        }
+
+        // Enter tuşu desteği
+        document.getElementById('nameInput').addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                verifyUser();
+            }
+        });
+
+    </script>
+</body>
+</html>
